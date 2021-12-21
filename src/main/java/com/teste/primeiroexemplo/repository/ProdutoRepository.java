@@ -1,17 +1,18 @@
 package com.teste.primeiroexemplo.repository;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Optional;
 
 import com.teste.primeiroexemplo.model.Produto;
+import com.teste.primeiroexemplo.model.exception.ResourceNotFoundException;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class ProdutoRepository {
 
-    //Simulando um banco de dados
+    // Simulando um banco de dados
     private List<Produto> produtos = new ArrayList<Produto>();
     private Integer ultimoId = 0; // Toda vez que começar uma aplicação, inicia com 0.
 
@@ -73,7 +74,7 @@ public class ProdutoRepository {
         Optional<Produto> produtoEncontrado = obterPorId(produto.getId());
 
         if (produtoEncontrado.isEmpty()) {
-            throw new InputMismatchException("Produto não encontrado");
+            throw new ResourceNotFoundException("Produto não encontrado");
         }
 
         // Eu tenho que remover o produto antigo da lista.
